@@ -3,39 +3,39 @@ from tkinter import Tk, BOTH, Canvas
 
 class Window:
     def __init__(self, width, height):
-        self.root = Tk()
-        self.root.title("Maze Solver")
+        self.__root = Tk()
+        self.__root.title("Maze Solver")
 
-        self.root.protocol("WM_DELETE_WINDOW", self.close)
+        self.__root.protocol("WM_DELETE_WINDOW", self.close)
 
-        self.canvas = Canvas(
-            self.root, 
+        self.__canvas = Canvas(
+            self.__root, 
             width = width, 
             height = height,
             bg="white"
         )
-        self.canvas.pack(fill=BOTH, expand=1)
-        self.running = False
+        self.__canvas.pack(fill=BOTH, expand=1)
+        self.__running = False
 
     def redraw(self):
-        self.root.update()
-        self.root.update_idletasks()
+        self.__root.update()
+        self.__root.update_idletasks()
 
     def wait_for_close(self):
-        self.running = True
-        while self.running:
+        self.__running = True
+        while self.__running:
             self.redraw()
 
-    def draw_line(self, line, fill_color):
+    def draw_line(self, line, fill_color="black"):
         if not isinstance(line, Line):
             raise TypeError("Line input must be Line type")
-        line.draw(self.canvas, fill_color)
+        line.draw(self.__canvas, fill_color)
 
     def close(self):
-        self.running = False
+        self.__running = False
 
 class Point():
-    def __init__(self, x=0, y=0):
+    def __init__(self, x, y):
         self.x = x
         self.y = y
 
